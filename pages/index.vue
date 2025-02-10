@@ -9,8 +9,9 @@
     @keyup.enter="startChat">
   <div v-if="isChatting"
     class="TEXT_AREA absolute w-[40%] h-screen top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-y-auto mt-[2vmin]">
-    <div v-for="(message, index) in  messages " :key="index" class="bg-slate-600 p-3 mb-6 rounded-xl text-white w-1/2"
-      :class="{ 'ml-[50 %]': true }">
+    <div v-for="(message, index) in messages" :key="index" 
+      class="bg-slate-600 p-3 mb-6 rounded-xl text-white w-1/2"
+      :class="{ 'ml-auto': index % 2 === 0, 'mr-auto': index % 2 === 1 }">
       <p>{{ message }}</p>
     </div>
   </div>
