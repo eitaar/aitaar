@@ -8,9 +8,9 @@
     class="TEXT_INPUT font-Roboto absolute w-[40%] h-[5vmin] text-white bg-slate-700 rounded-full outline-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pl-[2vmin] z-10"
     @keyup.enter="startChat">
   <div v-if="isChatting"
-    class="TEXT_AREA absolute w-[40%] h-screen top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-y-auto mt-[2vmin]">
+    class="TEXT_AREA absolute w-[40%] h-[80vh] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-y-auto mt-[2vmin]">
     <div v-for="(message, index) in messages" :key="index" 
-      class="bg-slate-600 p-3 mb-6 rounded-xl text-white w-1/2"
+      class="bg-slate-600 p-3 mb-6 rounded-xl text-white w-[45%]"
       :class="{ 'ml-auto': index % 2 === 0, 'mr-auto': index % 2 === 1 }">
       <p>{{ message }}</p>
     </div>
