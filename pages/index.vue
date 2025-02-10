@@ -10,8 +10,8 @@
   <div v-if="isChatting"
     class="TEXT_AREA absolute w-[40%] h-[80vh] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-y-auto mt-[2vmin]">
     <div v-for="(message, index) in messages" :key="index" 
-      class="bg-slate-600 p-3 mb-6 rounded-xl text-white w-[45%] break-words"
-      :class="{ 'ml-auto': index % 2 === 0, 'mr-auto': index % 2 === 1 }">
+      class=" p-3 mb-6 rounded-xl text-white w-[45%] break-words"
+      :class="{ 'ml-auto bg-slate-600': index % 2 === 0, 'mr-auto bg-sky-700': index % 2 === 1 }">
       <p class="whitespace-pre-wrap">{{ message }}</p>
     </div>
   </div>
@@ -32,12 +32,18 @@ function startChat() {
 
   if (!isChatting.value) {
     isChatting.value = true;
-    gsap.to(".TEXT_INPUT", { y: "45vh", duration: 0.6, ease: "power2.inOut" });
+    gsap.to(".TEXT_INPUT", { y: "45vh", duration: 0.4, ease: "power2.inOut" });
   }
 }
 
 function responseToInput(input) {
-  messages.value.push(`Response to: ${input}`);
+  let num = 42;
+  if (["Can you say something other than 42?", "Can you say something other than 42"].includes(input)) {
+    num = 418;
+  } else if (["1+1", "1+1=", "1 + 1", "1 + 1=", "what is 1+1", "what is 1+1=", "what is 1 + 1", "what is 1 + 1="].includes(input)) {
+    num = 3;
+  }
+  messages.value.push(`the answer for your question "${input}" is ${num}`);
 }
 </script>
 <style>
