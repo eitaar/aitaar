@@ -9,9 +9,9 @@
     @keyup.enter="startChat">
   <div v-if="isChatting"
     class="TEXT_AREA absolute w-[40%] h-[80vh] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-y-auto mt-[2vmin]">
-    <div v-for="(message, index) in messages" :key="index" class="p-3 mb-6 rounded-xl text-white w-[45%] break-words"
+    <div v-for="(message, index) in messages" :key="index" class=" p-3 mb-6 rounded-xl text-white w-[45%] break-words"
       :class="{ 'ml-auto bg-slate-600': index % 2 === 0, 'mr-auto bg-sky-700': index % 2 === 1 }">
-      <p class="whitespace-pre-wrap">{{ message }}</p>
+      <p class="whitespace-pre-wrap">{{ dynamicMessage }}</p>
     </div>
   </div>
 </template>
@@ -21,7 +21,7 @@ import { gsap } from "gsap";
 const text = ref("");
 const isChatting = ref(false);
 const messages = ref([]);
-
+let dynamicMessage = ref("");
 function startChat() {
   if (!text.value.trim()) return;
 
@@ -42,11 +42,14 @@ function responseToInput(input) {
   } else if (["1+1", "1+1=", "1 + 1", "1 + 1=", "what is 1+1", "what is 1+1=", "what is 1 + 1", "what is 1 + 1="].includes(input)) {
     num = 3;
   }
-  const response = `the answer for your question "${input}" is ${num}`;
-  messages.value.push(response);
+  messages.value.push(`the answer for your question "${input}" is ${num}`);
+  for (let i = 0; i < messages.value[(messages.value.length)-1].split(" ").length; i++) {
+    setTimeout(() => {
+      dynamicMessage.value = messages.value[(messages.value.length)-1].split(" ")[i];
+    },1000);
+  }
 }
 </script>
-
 <style>
 .TEXT_AREA::-webkit-scrollbar {
   display: none;
