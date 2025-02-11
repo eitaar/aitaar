@@ -32,7 +32,7 @@ function typeMessage(message,index) {
     setTimeout(() => {
       currentText += (wordIndex > 0 ? ' ' : '') + word;
       displayMessages.value[index] = currentText;
-    }, wordIndex * 200);
+    }, wordIndex * 50);
   });
 }
 
